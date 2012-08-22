@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Name>Tugberk</Name>
+    <FullName>$(Name) Ugurlu</FullName>
+    <TxtFilesPath>$(MSBuildProjectDirectory)\files\*.txt</TxtFilesPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TxtFiles Include="$(TxtFilesPath)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Simpsons Include="Homer">
+      <CatchPhrase>Doh</CatchPhrase>
+    </Simpsons>
+    <Simpsons Include="Marge">
+      <CatchPhrase>Mmmmmmmmmmmph</CatchPhrase>
+    </Simpsons>
+    <Simpsons Include="Bart">
+      <CatchPhrase>Ear my shorts</CatchPhrase>
+    </Simpsons>
+    <Simpsons Include="Lisa">
+      <CatchPhrase>Bart</CatchPhrase>
+    </Simpsons>
+  </ItemGroup>
+  
+  <Target Name="HelloWorld" DependsOnTargets="ListFiles">
+    <Message Text="$(MSBuildProjectDirectory)" />
+    <Message Text="$(FullName)"></Message>
+  </Target>
+
+  <Target Name="ListFiles">
+    <Message Text="@(TxtFiles)" />
+    <Message Text="@(TxtFiles->'%(ModifiedTime)')" />
+  </Target>
+
+  <Target Name="ListSimpsons">
+    <Message Text="@(Simpsons)"></Message>
+    <Message Text="@(Simpsons->'%(CatchPhrase)')"></Message>
+  </Target>
+  
+</Project>
+
+<!--
+  Docs:
+    MSBuild Reserved Properties
+    http://msdn.microsoft.com/en-us/library/ms164309.aspx 
+   
+    Common MSBuild Project Items
+    http://msdn.microsoft.com/en-us/library/bb629388.aspx
+-->
